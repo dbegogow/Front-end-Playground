@@ -29,7 +29,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
 
   roomList: RoomList[] = [];
 
-  stream = new Observable(observer => {
+  stream = new Observable<string>(observer => {
     observer.next('user1');
     observer.next('user2');
     observer.next('user3');
@@ -91,6 +91,31 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
     };
 
     // this.roomList.push(room);
-    this.roomList = [...this.roomList, room];
+    this.roomsService.addRoom(room).subscribe((data) => {
+      this.roomList = data;
+    });
+  }
+
+  editRoom() {
+    const room: RoomList = {
+      roomNumber: '3',
+      roomType: 'Deluxe Room',
+      amenities: 'Air Conditioner, Free Wi-Fi, TV, Bathroom, Kitchen',
+      price: 500,
+      photos: 'https://www.theghotel.ie/wp-content/uploads/2020/09/Deluxe-Room.jpg',
+      checkinTime: new Date('11-Nov-2021'),
+      checkoutTime: new Date('12-Nov-2021'),
+      rating: 4.5
+    };
+
+    this.roomsService.editRoom(room).subscribe((data) => {
+      this.roomList = data;
+    });
+  }
+
+  deleteRoom() {
+    this.roomsService.deleteRoom('3').subscribe((data) => {
+      this.roomList = data;
+    });
   }
 }
