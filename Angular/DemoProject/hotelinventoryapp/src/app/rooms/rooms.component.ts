@@ -1,4 +1,5 @@
 import { AfterViewChecked, AfterViewInit, Component, DoCheck, OnInit, QueryList, SkipSelf, ViewChild, ViewChildren } from '@angular/core';
+import { Observable } from 'rxjs';
 import { HeaderComponent } from '../header/header.component';
 import { Room, RoomList } from './rooms';
 import { RoomsService } from './services/rooms.service';
@@ -28,6 +29,14 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
 
   roomList: RoomList[] = [];
 
+  stream = new Observable(observer => {
+    observer.next('user1');
+    observer.next('user2');
+    observer.next('user3');
+    observer.complete();
+    // observer.error('error');
+  });
+
   // @ViewChild(HeaderComponent, { static: true }) headerComponent!: HeaderComponent;
 
   @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
@@ -37,6 +46,12 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
   constructor(@SkipSelf() private roomsService: RoomsService) { }
 
   ngOnInit(): void {
+    this.stream.subscribe({
+      next: (value) => console.log(value),
+      complete: () => console.log('complete'),
+      error: (err) => console.log(err)
+    });
+    this.stream.subscribe((data) => console.log(data));
     this.roomsService.getRooms().subscribe(rooms => {
       this.roomList = rooms;
     });
