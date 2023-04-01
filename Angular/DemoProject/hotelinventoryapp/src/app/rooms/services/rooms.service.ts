@@ -8,8 +8,9 @@ import { RoomList } from '../rooms';
   providedIn: 'root'
 })
 export class RoomsService {
-  roomList: RoomList[] = [
-  ];
+  roomList: RoomList[] = [];
+
+  getRooms$ = this.http.get<RoomList[]>('/api/rooms')
 
   constructor(
     @Inject(APP_SERVICE_CONFIG) private config: AppConfig,
