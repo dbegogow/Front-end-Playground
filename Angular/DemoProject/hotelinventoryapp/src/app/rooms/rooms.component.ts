@@ -1,6 +1,6 @@
 import { HttpEventType } from '@angular/common/http';
-import { AfterViewChecked, AfterViewInit, Component, DoCheck, OnInit, QueryList, SkipSelf, ViewChild, ViewChildren } from '@angular/core';
-import { Observable } from 'rxjs';
+import { AfterViewChecked, AfterViewInit, Component, DoCheck, OnDestroy, OnInit, QueryList, SkipSelf, ViewChild, ViewChildren } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { HeaderComponent } from '../header/header.component';
 import { Room, RoomList } from './rooms';
 import { RoomsService } from './services/rooms.service';
@@ -10,7 +10,7 @@ import { RoomsService } from './services/rooms.service';
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.scss']
 })
-export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterViewChecked {
+export class RoomsComponent implements OnInit, OnDestroy, DoCheck, AfterViewInit, AfterViewChecked {
 
   hotelName = 'Hilton Hotel';
 
@@ -46,6 +46,10 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
 
   totalBytes = 0;
 
+  subscription !: Subscription
+
+  rooms$ = this.roomsService.getRooms$;
+
   constructor(@SkipSelf() private roomsService: RoomsService) { }
 
   ngOnInit(): void {
@@ -74,9 +78,9 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
       error: (err) => console.log(err)
     });
     this.stream.subscribe((data) => console.log(data));
-    this.roomsService.getRooms().subscribe(rooms => {
-      this.roomList = rooms;
-    });
+    // this.roomsService.getRooms$.subscribe(rooms => {
+    //   this.roomList = rooms;
+    // });
   }
 
   ngDoCheck(): void {
@@ -139,5 +143,11 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
     this.roomsService.deleteRoom('3').subscribe((data) => {
       this.roomList = data;
     });
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
