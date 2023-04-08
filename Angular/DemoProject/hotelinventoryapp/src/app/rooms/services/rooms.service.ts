@@ -1,4 +1,4 @@
-import { HttpClient, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { AppConfig } from '../../AppConfig/appconfig.interface';
 import { APP_SERVICE_CONFIG } from '../../AppConfig/appconfig.service';
@@ -10,7 +10,7 @@ import { shareReplay } from 'rxjs';
 })
 export class RoomsService {
   roomList: RoomList[] = [];
-
+  // headers = new HttpHeaders({ 'token': 'cnsjvh9q843hfirf' });
   getRooms$ = this.http.get<RoomList[]>('/api/rooms').pipe(
     shareReplay(1)
   );
@@ -23,7 +23,7 @@ export class RoomsService {
   }
 
   getRooms() {
-    return this.http.get<RoomList[]>('/api/rooms');
+    return this.http.get<RoomList[]>('/api/room');
   }
 
   addRoom(room: RoomList) {
