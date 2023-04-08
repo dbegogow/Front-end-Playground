@@ -1,6 +1,6 @@
 import { HttpEventType } from '@angular/common/http';
 import { AfterViewChecked, AfterViewInit, Component, DoCheck, OnDestroy, OnInit, QueryList, SkipSelf, ViewChild, ViewChildren } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription, catchError, of } from 'rxjs';
 import { HeaderComponent } from '../header/header.component';
 import { Room, RoomList } from './rooms';
 import { RoomsService } from './services/rooms.service';
@@ -46,9 +46,19 @@ export class RoomsComponent implements OnInit, OnDestroy, DoCheck, AfterViewInit
 
   totalBytes = 0;
 
-  subscription !: Subscription
+  subscription !: Subscription;
 
-  rooms$ = this.roomsService.getRooms$;
+  error$: Subject<string> = new Subject<string>();
+
+  getError$ = this.error$.asObservable();
+
+  rooms$ = this.roomsService.getRooms$.pipe(
+    catchError((err) => {
+      console.log(err);
+      this.error$.next(err.message);
+      return of([])
+    })
+  );
 
   constructor(@SkipSelf() private roomsService: RoomsService) { }
 
