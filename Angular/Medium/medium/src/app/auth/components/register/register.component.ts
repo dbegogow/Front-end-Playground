@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -6,7 +7,6 @@ import { register } from '../../store/actions';
 import { RegisterRequestInterface } from '../../types/registerRequest.interface';
 import { selectIsSubmitting } from '../../store/reducers';
 import { AuthStateInterface } from '../../types/authState.interface';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'mc-register',
