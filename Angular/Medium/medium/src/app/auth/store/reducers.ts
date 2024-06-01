@@ -14,4 +14,8 @@ const authFeature = createFeature({
   ),
 });
 
-export const { name: authFeatureKey, reducer: authReducer } = authFeature;
+export const {
+  name: authFeatureKey,
+  reducer: authReducer,
+  selectIsSubmitting,
+} = authFeature;
