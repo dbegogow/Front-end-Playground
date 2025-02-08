@@ -1,13 +1,22 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
+  template: ` <h2>{{ topicName }}</h2> `,
+  styleUrls: ['./app.component.scss'],
   standalone: true,
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  title = 'performance-optimization-techniques';
+  name = 'OnPush strategy'
+  topicName = 'Change Detection in Angular';
+
+  constructor(private cdr: ChangeDetectorRef) {
+    setTimeout(() => {
+        this.topicName = 'OnPush strategy in Angular';
+        console.log('Data Model has changed...');
+        this.cdr.markForCheck();
+    }, 3000);
+  }
 }
