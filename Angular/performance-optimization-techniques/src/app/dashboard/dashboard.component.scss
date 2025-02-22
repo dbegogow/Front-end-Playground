@@ -1,0 +1,49 @@
+$primary-color: #2c3e50;
+$secondary-color: #34495e;
+$highlight-color: #1abc9c;
+$background-color: #ecf0f1;
+$text-color: white;
+
+.sidebar {
+  width: 200px;
+  background: $primary-color;
+  color: $text-color;
+  height: 100vh;
+  padding: 20px;
+  margin-top: 16px;
+
+  h2 {
+    text-align: center;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      padding: 10px;
+      margin: 10px 0;
+      background: $secondary-color;
+      text-align: center;
+      cursor: pointer;
+
+      &:hover {
+        background: $highlight-color;
+      }
+    }
+  }
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  background: $background-color;
+
+  .card {
+    background: white;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+}

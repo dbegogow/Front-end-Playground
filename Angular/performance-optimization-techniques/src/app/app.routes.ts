@@ -5,12 +5,13 @@ import { ContentComponent } from './content/content.component';
 export const routes: Routes = [
   {
     path: 'dashboard',
-    component: DashboardComponent,
-    title: 'Dashboard',
+    loadComponent: () =>
+      import('../app/dashboard/dashboard.component').then(
+        (m) => m.DashboardComponent
+      ),
   },
   {
     path: 'content',
     component: ContentComponent,
-    title: 'Content',
   },
 ];
