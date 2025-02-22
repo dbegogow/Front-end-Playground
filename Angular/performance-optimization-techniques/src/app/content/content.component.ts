@@ -4,5 +4,6 @@ import { Component, Input } from '@angular/core';
   selector: 'app-content',
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.scss'],
+  standalone: true,
 })
-export class ContentComponent {}
+export default class ContentComponent {}

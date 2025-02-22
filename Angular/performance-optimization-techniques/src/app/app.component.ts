@@ -16,8 +16,9 @@ import { RouterModule } from '@angular/router';
     <button (click)="changeChannel()">Change Channel</button>
     <app-channel [name]="name"></app-channel>
     <h2>{{ counter$ | async }}</h2>
-    <button routerLink="/dashboard">Dashboard</button>
     <button routerLink="/">Home</button>
+    <button routerLink="/dashboard">Dashboard</button>
+    <button routerLink="/content">Content</button>
     <router-outlet></router-outlet>
   `,
   styleUrls: ['./app.component.scss'],

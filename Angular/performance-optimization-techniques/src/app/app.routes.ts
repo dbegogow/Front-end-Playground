@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { ContentComponent } from './content/content.component';
 
 export const routes: Routes = [
   {
@@ -8,6 +7,6 @@ export const routes: Routes = [
   },
   {
     path: 'content',
-    component: ContentComponent,
+    loadComponent: () => import('../app/content/content.component'),
   },
 ];
