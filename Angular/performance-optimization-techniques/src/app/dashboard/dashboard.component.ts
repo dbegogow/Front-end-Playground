@@ -6,4 +6,4 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./dashboard.component.scss'],
   standalone: true,
 })
-export class DashboardComponent {}
+export default class DashboardComponent {}
