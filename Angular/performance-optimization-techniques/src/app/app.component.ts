@@ -6,6 +6,7 @@ import {
 import { ChannelComponent } from './channel/channel.component';
 import { AsyncPipe } from '@angular/common';
 import { interval } from 'rxjs';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -15,10 +16,11 @@ import { interval } from 'rxjs';
     <button (click)="changeChannel()">Change Channel</button>
     <app-channel [name]="name"></app-channel>
     <h2>{{ counter$ | async }}</h2>
+    <router-outlet></router-outlet>
   `,
   styleUrls: ['./app.component.scss'],
   standalone: true,
-  imports: [ChannelComponent, AsyncPipe],
+  imports: [ChannelComponent, AsyncPipe, RouterModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
