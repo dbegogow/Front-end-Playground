@@ -1,0 +1,13 @@
+<div class="video-container">
+  <div *ngIf="!isPlaying" class="thumbnail" (click)="playVideo()">
+    <img [src]="thumbnailUrl" alt="YouTube Video Thumbnail" />
+    <div class="play-button">&#9658;</div>
+  </div>
+  <iframe
+    *ngIf="isPlaying"
+    [src]="safeVideoUrl"
+    frameborder="0"
+    allowfullscreen
+  >
+  </iframe>
+</div>
