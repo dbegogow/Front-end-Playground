@@ -12,7 +12,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 export default class YoutubeVideoComponent {
   @Input() videoId!: string;
   isPlaying = false;
-  safeVideoUrl!: SafeResourceUrl; // Store sanitized URL
+  safeVideoUrl!: SafeResourceUrl;
 
   constructor(private sanitizer: DomSanitizer) {}
 
