@@ -8,5 +8,11 @@ export const routes: Routes = [
   {
     path: 'content',
     loadComponent: () => import('../app/content/content.component'),
+    children: [
+      {
+        path: 'posts',
+        loadComponent: () => import('../app/content/posts/posts.component'),
+      },
+    ],
   },
 ];
